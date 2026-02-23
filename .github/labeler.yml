@@ -1,0 +1,52 @@
+# Labels applied automatically based on file paths changed in PRs
+'area: components':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/carbideui/src/lib/**/*.ts'
+          - 'projects/carbideui/src/lib/**/*.html'
+
+'area: styles':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/carbideui/src/**/*.scss'
+          - 'projects/carbideui/src/styles/**'
+
+'area: docs':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+          - '**/*.mdx'
+          - 'projects/carbideui/src/**/*.stories.ts'
+
+'area: tests':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/carbideui/src/**/*.spec.ts'
+          - 'vitest.config.ts'
+
+'area: ci':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**'
+
+'area: storybook':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.storybook/**'
+          - 'projects/carbideui/src/**/*.stories.ts'
+          - 'projects/carbideui/src/**/*.mdx'
+
+'area: i18n':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/carbideui/src/lib/ngcc-i18n/**'
+
+'area: build':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'package.json'
+          - 'package-lock.json'
+          - 'angular.json'
+          - 'tsconfig*.json'
+          - 'projects/carbideui/ng-package.json'
+          - 'projects/carbideui/package.json'

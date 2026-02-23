@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "vitest/globals",
+      "node",
+      "vitest-axe",
+      "@testing-library/jest-dom"
+    ]
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "projects/**/*.spec.ts",
+    "vitest.setup.ts"
+  ]
+}

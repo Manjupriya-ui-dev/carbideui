@@ -1,0 +1,7 @@
+dist/
+node_modules/
+coverage/
+.angular/
+storybook-static/
+package-lock.json
+projects/carbideui/documentation.json

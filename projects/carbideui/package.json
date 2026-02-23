@@ -1,0 +1,66 @@
+{
+  "name": "@assistanz/carbideui",
+  "version": "0.1.0",
+  "description": "An independent, community-driven Angular component library inspired by the Carbon Design System. NOT affiliated with IBM.",
+  "license": "MIT",
+  "author": "Assistanz",
+  "type": "module",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/assistanz/carbideui.git"
+  },
+  "homepage": "https://assistanz.github.io/carbideui",
+  "bugs": {
+    "url": "https://github.com/assistanz/carbideui/issues"
+  },
+  "keywords": [
+  "angular",
+  "angular-library",
+  "component-library",
+  "ui-components",
+  "design-system",
+  "carbon-design-system",
+  "carbon-components",
+  "accessible-ui",
+  "wcag",
+  "standalone-components",
+  "signals",
+  "frontend",
+  "typescript",
+  "angular-carbon-components",
+  "carbideui"
+],
+  "module": "./fesm2022/carbideui.mjs",
+  "typings": "./index.d.ts",
+  "exports": {
+    "./styles": "./styles/carbon.scss"
+  },
+  "files": [
+    "fesm2022/",
+    "styles/",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@angular/common": ">=20 <22",
+    "@angular/core": ">=20 <22",
+    "@angular/forms": ">=20 <22",
+    "@angular/router": ">=20 <22",
+    "@carbon/styles": "^1.98.0",
+    "@carbon/charts": "^1.27.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": ["*.scss"],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  }
+}

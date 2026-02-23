@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'npm'
+    groups:
+      angular:
+        patterns:
+          - '@angular/*'
+      carbon:
+        patterns:
+          - '@carbon/*'
+      storybook:
+        patterns:
+          - '@storybook/*'
+          - 'storybook'
+      dev-dependencies:
+        dependency-type: 'development'
+        exclude-patterns:
+          - '@angular/*'
+          - '@carbon/*'
+          - '@storybook/*'
+          - 'storybook'
+    open-pull-requests-limit: 10

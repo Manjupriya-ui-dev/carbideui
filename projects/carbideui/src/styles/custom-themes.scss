@@ -1,0 +1,73 @@
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes' as *;
+@use '@carbon/styles/scss/utilities' as *;
+
+/* Built-in Carbon themes */
+
+/* Default theme (white)
+it sets the theme variables values */
+
+:root {
+  @include theme($white);
+}
+
+[data-carbon-theme='g10'] {
+  @include theme($g10);
+}
+
+[data-carbon-theme='g90'] {
+  @include theme($g90);
+}
+
+[data-carbon-theme='g100'] {
+  @include theme($g100);
+}
+
+/* Custom-1 theme → large rounded corners */
+[data-carbon-theme='rounded'] {
+  @include theme($white); // base tokens
+
+  & {
+    --sb--button-corner-radius: 2rem;
+    --sb--input-corner-radius: 2rem;
+  }
+}
+
+/* Custom-2 theme → small rounded corners + centered text */
+[data-carbon-theme='curved'] {
+  @include theme($white); // base tokens
+
+  & {
+    --sb--button-corner-radius: 4px;
+    --sb--input-corner-radius: 12px;
+  }
+
+  .sb--btn {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem; // space between icon & text
+  }
+
+  .cds--btn--ghost.sb--btn {
+    gap: 0;
+  }
+}
+
+/* Custom-3 theme → text + icon centered */
+[data-carbon-theme='centered'] {
+  @include theme($white); // base tokens
+
+  .sb--btn {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .cds--btn--ghost.sb--btn {
+    gap: 0;
+  }
+}

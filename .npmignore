@@ -1,0 +1,54 @@
+# Node & package manager
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Angular / build output (only publish dist/)
+src/
+projects/
+coverage/
+.tmp/
+.angular/
+out-tsc/
+
+# Tests & demos
+**/*.spec.ts
+**/*.test.ts
+**/test/**
+**/tests/**
+**/demo/**
+**/demos/**
+**/__tests__/**
+**/*.e2e.ts
+**/cypress/**
+**/playwright/**
+
+# Tooling & configs
+.vscode/
+.idea/
+.editorconfig
+.prettierrc*
+.eslintrc*
+.stylelintrc*
+tsconfig*.json
+angular.json
+nx.json
+karma.conf.js
+jest.config.*
+vitest.config.*
+webpack*.js
+rollup*.js
+
+# Docs & meta (keep core legal files)
+!README.md
+!LICENSE
+!NOTICE
+!THIRD_PARTY_NOTICES.md
+
+# Misc
+.DS_Store
+.env
+.env.*
+*.map

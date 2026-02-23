@@ -1,0 +1,21 @@
+{
+  "extends": "../projects/carbideui/tsconfig.lib.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "../projects/carbideui/src/lib/test.ts",
+    "../projects/carbideui/src/lib/**/*.spec.ts",
+    "./main.ts",
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "../projects/carbideui/src/lib/**/*.stories.*",
+    "./preview.ts",
+    "./projects/carbideui/src/lib/styles/custom_themes.scss"
+  ],
+  "files": ["./typings.d.ts"]
+}
