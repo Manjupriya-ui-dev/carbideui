@@ -1,0 +1,46 @@
+<input
+  type="checkbox"
+  class="cds--checkbox"
+  [id]="inputId"
+  [checked]="getChecked()"
+  [disabled]="isDisabled()"
+  [attr.required]="required ? 'true' : null"
+  (change)="onToggle($event)"
+  (blur)="onBlur()"
+  [attr.aria-required]="required ? 'true' : null"
+  [attr.aria-label]="computedAriaLabel()"
+  [attr.aria-labelledby]="labelledBy()"
+  [attr.aria-describedby]="describedBy()"
+  [attr.aria-invalid]="invalid_value() ? 'true' : null"
+  role="checkbox"
+  [attr.aria-checked]="indeterminate ? 'mixed' : getChecked()"
+/>
+
+<label class="cds--checkbox-label" [id]="inputId + '-label'" [attr.for]="inputId">
+  <span class="cds--checkbox-label-text ngcc--checkbox-label" [class.cds--skeleton]="skeleton">
+    {{ !skeleton ? label : '' }}
+    @if (required && !skeleton) {
+      <span class="cds--input-required" aria-hidden="true">*</span>
+    }
+  </span>
+</label>
+
+@if (helperText && !invalid_value()) {
+  <div class="cds--form__helper-text" [id]="inputId + '-helper'">
+    {{ helperText }}
+  </div>
+}
+
+@if (invalid_value()) {
+  <div class="cds--checkbox__validation-msg" [id]="inputId + '-error'">
+    <ngcc-icon
+      svgClass="ngcc--icon-only cds--checkbox__invalid-icon"
+      [name]="'error'"
+      color="#da1e28"
+      size="sm"
+    />
+    <div class="cds--form-requirement">
+      {{ errorMessage }}
+    </div>
+  </div>
+}
