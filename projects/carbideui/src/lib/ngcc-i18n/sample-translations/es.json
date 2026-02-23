@@ -1,0 +1,15 @@
+{
+  "page_title": "Inicio",
+  "greeting": "Hola",
+  "welcome": "¡Bienvenido, {{name}}!",
+  "goodbye": "Adiós",
+  "user_greeting": "¡Hola {{firstName}} {{lastName}}!",
+  "items_count": "Tienes {{count}} elementos",
+  "button_save": "Guardar",
+  "button_cancel": "Cancelar",
+  "button_delete": "Eliminar",
+  "error_message": "Ocurrió un error: {{errorCode}}",
+  "success_message": "¡Operación completada exitosamente!",
+  "loading": "Cargando...",
+  "no_results": "Sin resultados encontrados"
+}

@@ -1,0 +1,15 @@
+{
+  "page_title": "Home",
+  "greeting": "Hello",
+  "welcome": "Welcome, {{name}}!",
+  "goodbye": "Goodbye",
+  "user_greeting": "Hello {{firstName}} {{lastName}}!",
+  "items_count": "You have {{count}} items",
+  "button_save": "Save",
+  "button_cancel": "Cancel",
+  "button_delete": "Delete",
+  "error_message": "An error occurred: {{errorCode}}",
+  "success_message": "Operation completed successfully!",
+  "loading": "Loading...",
+  "no_results": "No results found"
+}
