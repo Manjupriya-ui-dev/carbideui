@@ -1,0 +1,101 @@
+.ngcc--date-picker__calendar {
+  width: 300px;
+  padding: 8px;
+  position: absolute;
+  box-shadow: 0 6px 18px rgba(8, 35, 49, 0.18);
+  background: var(--cds-background, #fff);
+  border-radius: 4px;
+
+  .ngcc--date-picker__month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+
+    .ngcc--date-picker__selectors {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      .ngcc--date-picker__selector {
+        display: flex;
+        flex-direction: column;
+      }
+
+      select {
+        font-size: 13px;
+        font-weight: bold;
+        background: #fff;
+        border: none;
+      }
+
+      .ngcc--date-picker__quick-actions {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+  .ngcc--date-picker__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  .ngcc--date-picker__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+
+    .ngcc--date-picker__week {
+      display: contents;
+    }
+
+    .ngcc--date-picker__day {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:focus {
+        outline: 3px solid rgba(15, 98, 254, 0.18);
+        outline-offset: 2px;
+        border-radius: 8px;
+      }
+
+      &:hover {
+        background: #e5e5e5;
+      }
+
+      &--today {
+        border: 1px solid #0f62fe;
+      }
+
+      &--selected {
+        background: #0f62fe;
+        color: #fff;
+        font-weight: bold;
+      }
+
+      &--in-range {
+        background: #edf5ff;
+        border-radius: 0;
+      }
+
+      &--disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .ngcc--date-picker__nav {
+    &:hover {
+      background: #e5e5e5;
+    }
+  }
+}

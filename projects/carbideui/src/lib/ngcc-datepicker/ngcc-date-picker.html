@@ -1,0 +1,276 @@
+<div class="cds--form-item">
+  <div
+    class="cds--date-picker"
+    [class.cds--date-picker--simple]="getType() === 'simple'"
+    [class.cds--date-picker--single]="getType() === 'single'"
+    [class.cds--date-picker--range]="getType() === 'range'"
+    [class.cds--date-picker--light]="getTheme() === 'light'"
+    [class.cds--skeleton]="getSkeleton()"
+  >
+    <div class="cds--date-picker-container">
+      <!-- Skeleton -->
+      @if (getSkeleton()) {
+        <span class="cds--label cds--skeleton"></span>
+        <div class="cds--date-picker__input cds--skeleton"></div>
+      } @else {
+        <!-- Label -->
+        @if (getLabel()) {
+          <label [for]="getId()" class="cds--label" [class.cds--label--disabled]="disabled">
+            @if (!isTemplate(getLabel())) {
+              {{ getLabel() }}
+            } @else {
+              <ng-container *ngTemplateOutlet="labelTemplate()" />
+            }
+          </label>
+        }
+
+        <!-- Inputs -->
+        @if (getType() === 'range') {
+          <!-- RANGE: Start + End -->
+          <div class="cds--date-picker ngcc-date-picker">
+            <!-- Start -->
+            <div class="cds--date-picker-container">
+              <label class="cds--label cds--date-picker__sublabel" [for]="getId() + '-start'">
+                @if (getStartLabel()) {
+                  @if (!isTemplate(getStartLabel())) {
+                    {{ getStartLabel() }}
+                  } @else {
+                    <ng-container *ngTemplateOutlet="startLabelTemplate()" />
+                  }
+                } @else {
+                  Start date
+                }
+              </label>
+
+              <div
+                class="cds--date-picker-input__wrapper"
+                [class.cds--date-picker-input__wrapper--invalid]="getInvalid()"
+                [class.cds--date-picker-input__wrapper--warn]="getWarn()"
+              >
+                <span>
+                  <input
+                    #input
+                    autocomplete="off"
+                    type="text"
+                    class="cds--date-picker__input"
+                    [class.cds--date-picker__input--sm]="getSize() === 'sm'"
+                    [class.cds--date-picker__input--md]="getSize() === 'md'"
+                    [class.cds--date-picker__input--lg]="getSize() === 'lg'"
+                    [attr.data-invalid]="getInvalid() ? true : null"
+                    [value]="value()"
+                    [pattern]="getPattern()"
+                    [placeholder]="getPlaceholder()"
+                    [id]="getId() + '-start'"
+                    [disabled]="getDisabled()"
+                    [readonly]="getReadonly()"
+                    (focus)="openCalendar(false)"
+                    (click)="openCalendar(true)"
+                    (input)="onInputChange($event, false)"
+                  />
+
+                  <!-- Icons -->
+                  @if (!getWarn() && !getInvalid()) {
+                    <ngcc-icon
+                      svgClass="cds--date-picker__icon"
+                      name="calendar"
+                      size="sm"
+                      (click)="openCalendar(false)"
+                    />
+                  } @else if (getInvalid()) {
+                    <ngcc-icon
+                      svgClass="cds--date-picker__icon cds--date-picker__icon--invalid"
+                      name="error"
+                      color="#da1e28"
+                      size="sm"
+                    />
+                  } @else {
+                    <ngcc-icon
+                      svgClass="cds--date-picker__icon cds--date-picker__icon--warn"
+                      name="warn"
+                      color="#f1c21b"
+                      size="sm"
+                    />
+                  }
+                </span>
+              </div>
+            </div>
+
+            <!-- End -->
+            <div class="cds--date-picker-container">
+              <label class="cds--label cds--date-picker__sublabel" [for]="getId() + '-end'">
+                @if (getEndLabel()) {
+                  @if (!isTemplate(getEndLabel())) {
+                    {{ getEndLabel() }}
+                  } @else {
+                    <ng-container *ngTemplateOutlet="endLabelTemplate()" />
+                  }
+                } @else {
+                  End date
+                }
+              </label>
+
+              <div
+                class="cds--date-picker-input__wrapper"
+                [class.cds--date-picker-input__wrapper--invalid]="getInvalid()"
+                [class.cds--date-picker-input__wrapper--warn]="getWarn()"
+              >
+                <span>
+                  <input
+                    #endInput
+                    autocomplete="off"
+                    type="text"
+                    class="cds--date-picker__input"
+                    [class.cds--date-picker__input--sm]="getSize() === 'sm'"
+                    [class.cds--date-picker__input--md]="getSize() === 'md'"
+                    [class.cds--date-picker__input--lg]="getSize() === 'lg'"
+                    [attr.data-invalid]="getInvalid() ? true : null"
+                    [value]="endValue()"
+                    [pattern]="getPattern()"
+                    [placeholder]="getPlaceholder()"
+                    [id]="getId() + '-end'"
+                    [disabled]="getDisabled()"
+                    [readonly]="getReadonly()"
+                    (focus)="openCalendar(true)"
+                    (input)="onInputChange($event, true)"
+                  />
+
+                  <!-- Icons -->
+                  @if (!getWarn() && !getInvalid()) {
+                    <ngcc-icon
+                      svgClass="cds--date-picker__icon"
+                      name="calendar"
+                      size="sm"
+                      (click)="openCalendar(true)"
+                    />
+                  } @else if (getInvalid()) {
+                    <ngcc-icon
+                      svgClass="cds--date-picker__icon cds--date-picker__icon--invalid"
+                      name="error"
+                      color="#da1e28"
+                      size="sm"
+                    />
+                  } @else {
+                    <ngcc-icon
+                      svgClass="cds--date-picker__icon cds--date-picker__icon--warn"
+                      name="warn"
+                      color="#f1c21b"
+                      size="sm"
+                    />
+                  }
+                </span>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <!-- SINGLE / SIMPLE -->
+          <div
+            class="cds--date-picker-input__wrapper"
+            [class.cds--date-picker-input__wrapper--invalid]="getInvalid()"
+            [class.cds--date-picker-input__wrapper--warn]="getWarn()"
+          >
+            <span>
+              <input
+                #input
+                autocomplete="off"
+                type="text"
+                class="cds--date-picker__input"
+                [class.cds--date-picker__input--sm]="getSize() === 'sm'"
+                [class.cds--date-picker__input--md]="getSize() === 'md'"
+                [class.cds--date-picker__input--lg]="getSize() === 'lg'"
+                [attr.data-invalid]="getInvalid() ? true : null"
+                [value]="value()"
+                [pattern]="getPattern()"
+                [placeholder]="getPlaceholder()"
+                [id]="getId()"
+                [disabled]="getDisabled()"
+                [readonly]="getReadonly()"
+                (focus)="openCalendar(false)"
+                (input)="onInputChange($event)"
+              />
+
+              <!-- Icons -->
+              @if (getType() !== 'simple' && !getWarn() && !getInvalid()) {
+                <ngcc-icon
+                  svgClass="cds--date-picker__icon"
+                  name="calendar"
+                  size="sm"
+                  (click)="toggleCalendar()"
+                />
+              } @else if (getInvalid()) {
+                <ngcc-icon
+                  svgClass="cds--date-picker__icon cds--date-picker__icon--invalid"
+                  name="error"
+                  color="#da1e28"
+                  size="sm"
+                />
+              } @else if (getWarn()) {
+                <ngcc-icon
+                  svgClass="cds--date-picker__icon cds--date-picker__icon--warn"
+                  name="warn"
+                  color="#f1c21b"
+                  size="sm"
+                />
+              }
+            </span>
+          </div>
+        }
+
+        <!-- Helper / Invalid / Warn -->
+        @if (getHelperText() && !getInvalid() && !getWarn()) {
+          <div
+            class="cds--form__helper-text"
+            [class.cds--form__helper-text--disabled]="getDisabled()"
+          >
+            @if (!isTemplate(getHelperText())) {
+              {{ getHelperText() }}
+            } @else {
+              <ng-container *ngTemplateOutlet="helperTextTemplate()" />
+            }
+          </div>
+        }
+
+        @if (getInvalid()) {
+          <div class="cds--form-requirement">
+            @if (!isTemplate(getInvalidText())) {
+              {{ getInvalidText() }}
+            } @else {
+              <ng-container *ngTemplateOutlet="invalidTextTemplate()" />
+            }
+          </div>
+        } @else if (getWarn()) {
+          <div class="cds--form-requirement">
+            @if (!isTemplate(getWarnText())) {
+              {{ getWarnText() }}
+            } @else {
+              <ng-container *ngTemplateOutlet="warnTextTemplate()" />
+            }
+          </div>
+        }
+
+        <!-- Calendar popup -->
+        @if (calendarOpen()) {
+          <div
+            #calendarContainer
+            class="ngcc-date-picker__popup"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Choose a date"
+          >
+            <ngcc-date-picker-calendar
+              (dateSelected)="onDateSelected($event)"
+              (closed)="closeCalendar()"
+              [startDate]="startDateForCalendar()"
+              [endDate]="endDateForCalendar()"
+              [minDate]="getMinDate()"
+              [maxDate]="getMaxDate()"
+              [disabledDates]="getDisabledDates()"
+              [locale]="getLocale()"
+              [format]="getFormat()"
+              [emitDateObjects]="getEmitDateObjects()"
+            />
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

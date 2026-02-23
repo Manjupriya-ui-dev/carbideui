@@ -1,0 +1,95 @@
+<div
+  class="ngcc--date-picker__calendar"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Date picker calendar"
+>
+  <div class="ngcc--date-picker__month">
+    <ngcc-icon
+      class="cds--btn cds--btn--icon-only cds--btn--ghost"
+      (click)="prevMonth()"
+      aria-label="Previous month"
+      [name]="'chevron_left'"
+      size="sm"
+      color="black"
+    />
+
+    <div class="ngcc--date-picker__selectors" role="toolbar" aria-label="Select month and year">
+      <!-- Month selector -->
+      <div class="ngcc--date-picker__selector">
+        <select
+          id="ngcc-month"
+          aria-label="Select month"
+          [value]="currentMonth().toString()"
+          (change)="onMonthChange($event)"
+        >
+          @for (m of monthNames; track $index) {
+            <option
+              [value]="$index.toString()"
+              [selected]="$index.toString() == currentMonth().toString()"
+            >
+              {{ m }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <!-- Year selector -->
+      <div class="ngcc--date-picker__selector">
+        <select
+          id="ngcc-year"
+          aria-label="Select year"
+          [value]="currentYear().toString()"
+          (change)="onYearChange($event)"
+        >
+          @for (y of yearRange(); track y) {
+            <option [value]="y" [selected]="y == currentYear()">{{ y }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <ngcc-icon
+      class="cds--btn cds--btn--icon-only cds--btn--ghost"
+      (click)="nextMonth()"
+      aria-label="Next month"
+      color="black"
+      [name]="'chevron_right'"
+      size="sm"
+    />
+  </div>
+
+  <div class="ngcc--date-picker__weekdays">
+    @for (w of weekDays; track $index) {
+      <div class="ngcc--date-picker__weekday">{{ w }}</div>
+    }
+  </div>
+
+  <div class="ngcc--date-picker__days" role="grid" aria-label="Calendar">
+    @for (week of weeks(); track $index) {
+      <div class="ngcc--date-picker__week" role="row">
+        @for (cell of week; track $index) {
+          <button
+            type="button"
+            class="ngcc--date-picker__day"
+            role="gridcell"
+            [attr.aria-selected]="cell.isStart || cell.isEnd || cell.inRange ? 'true' : 'false'"
+            [attr.aria-disabled]="cell.disabled ? 'true' : null"
+            [class.ngcc--date-picker__day--today]="cell.isToday"
+            [class.ngcc--date-picker__day--selected]="cell.isStart || cell.isEnd"
+            [class.ngcc--date-picker__day--in-range]="cell.inRange"
+            [class.ngcc--date-picker__day--disabled]="cell.disabled"
+            [attr.tabindex]="cell.empty || cell.disabled ? -1 : 0"
+            (click)="select(cell)"
+            (mousemove)="setHover(cell.date ?? null)"
+            (mouseleave)="clearHover()"
+          >
+            @if (!cell.empty) {
+              <span>{{ cell.day }}</span>
+            }
+          </button>
+        }
+      </div>
+    }
+  </div>
+</div>
