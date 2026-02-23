@@ -1,0 +1,26 @@
+<button
+  type="button"
+  [id]="buttonId"
+  class="cds--accordion__heading"
+  [class.ngcc--accordion__button]="align() === 'start'"
+  [attr.aria-expanded]="ariaExpanded()"
+  [attr.aria-controls]="contentIdAttr"
+  [disabled]="getDisabled() || null"
+  (click)="toggle()"
+  (keydown)="onKeydown($event)"
+>
+  <ngcc-icon [name]="isOpen() ? 'chevron_up' : 'chevron_down'" />
+  <span class="cds--accordion__title">{{ title }}</span>
+</button>
+
+<div
+  class="cds--accordion__wrapper"
+  [id]="contentIdAttr"
+  role="region"
+  [attr.aria-labelledby]="buttonId"
+  [hidden]="!isOpen()"
+>
+  <div class="cds--accordion__content">
+    <ng-content />
+  </div>
+</div>
