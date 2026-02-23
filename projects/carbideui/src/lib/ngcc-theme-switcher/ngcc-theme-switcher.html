@@ -1,0 +1,16 @@
+<section class="ngcc--theme-switcher">
+  <h4>Active Theme: {{ currentTheme() }}</h4>
+
+  <div class="ngcc--theme-switcher__buttons">
+    @for (theme of themes; track theme) {
+      <button
+        type="button"
+        class="cds--btn cds--btn--ghost"
+        [class.active]="currentTheme() === theme"
+        (click)="setTheme(theme)"
+      >
+        {{ theme }}
+      </button>
+    }
+  </div>
+</section>
