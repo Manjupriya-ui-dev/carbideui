@@ -1,0 +1,97 @@
+<!-- LEFT OVERFLOW BUTTON -->
+<button
+  type="button"
+  (click)="handleOverflowNavClick(-1, tabsArray.length)"
+  (pointerdown)="handleOverflowNavMouseDown(-1)"
+  (pointerup)="handleOverflowNavMouseUp()"
+  (pointerleave)="handleOverflowNavMouseUp()"
+  (pointerout)="handleOverflowNavMouseUp()"
+  class="cds--tab--overflow-nav-button cds--tab--overflow-nav-button--previous"
+  [class.cds--tab--overflow-nav-button--hidden]="leftOverflowNavButtonHidden()"
+  title="Previous Tab"
+>
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+  >
+    <path d="M5 8L10 3 10.7 3.7 6.4 8 10.7 12.3 10 13z" />
+  </svg>
+</button>
+
+<!-- TAB LIST -->
+<div
+  #tabList
+  class="cds--tab--list"
+  role="tablist"
+  [attr.aria-label]="ariaLabel()"
+  (scroll)="handleScroll()"
+>
+  <ng-container [ngTemplateOutlet]="contentBefore()" />
+
+  <!-- TAB BUTTONS -->
+  @for (tab of tabsArray; track $index; let i = $index) {
+    <button
+      #tabItem
+      type="button"
+      role="tab"
+      [attr.aria-selected]="tab.active()"
+      [attr.aria-controls]="tab.id()"
+      [attr.tabindex]="tab.active() ? 0 : null"
+      [attr.aria-disabled]="tab.disabled()"
+      [class.cds--tabs__nav-item--selected]="tab.active()"
+      [class.cds--tabs__nav-item--disabled]="tab.disabled()"
+      class="cds--tabs__nav-item cds--tabs__nav-link"
+      draggable="false"
+      [attr.id]="tab.id() + '-header'"
+      (click)="selectTab(tab, i)"
+      (focus)="onTabFocus(i)"
+    >
+      <!-- ROUTER-LINK / CUSTOM TEMPLATE SUPPORT -->
+      @if (tab.headingIsTemplate()) {
+        <ng-template
+          [ngTemplateOutlet]="getHeadingTemplate(tab)"
+          [ngTemplateOutletContext]="{ $implicit: tab.context() }"
+        />
+      } @else {
+        <!-- If heading is plain text -->
+        <span class="cds--tabs__nav-text">
+          {{ tab.heading() }}
+        </span>
+      }
+    </button>
+  }
+
+  <ng-container [ngTemplateOutlet]="contentAfter()" />
+</div>
+
+<!-- RIGHT OVERFLOW BUTTON -->
+<button
+  type="button"
+  (click)="handleOverflowNavClick(1, tabsArray.length)"
+  (pointerdown)="handleOverflowNavMouseDown(1)"
+  (pointerup)="handleOverflowNavMouseUp()"
+  (pointerleave)="handleOverflowNavMouseUp()"
+  (pointerout)="handleOverflowNavMouseUp()"
+  class="cds--tab--overflow-nav-button cds--tab--overflow-nav-button--next"
+  [class.cds--tab--overflow-nav-button--hidden]="rightOverflowNavButtonHidden()"
+  title="Next Tab"
+>
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+  >
+    <path d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z" />
+  </svg>
+</button>
