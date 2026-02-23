@@ -1,0 +1,21 @@
+.ngcc--no-data {
+  width: 100%;
+  height: 150px;
+  text-align: center;
+}
+
+// Truncated text for headers and cells
+.cds--data-table__cell,
+.cds--table-header .cds--table-header-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 240px; // configurable if column width not defined
+  position: relative;
+  vertical-align: middle;
+}
+
+.cds--data-table__cell:hover,
+.cds--table-header:hover .cds--table-header-label {
+  cursor: pointer;
+}

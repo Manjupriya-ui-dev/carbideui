@@ -1,0 +1,123 @@
+<div class="cds--data-table-wrapper" [attr.aria-busy]="getLoading() ? 'true' : null">
+  <div class="cds--data-table-container" aria-label="Data table">
+    <ng-content select="ngcc-table-toolbar" />
+    <table class="cds--data-table cds--data-table--compact" aria-label="Data table">
+      <thead class="cds--data-table__head">
+        <tr class="cds--data-table__row">
+          @if (allowSelection()) {
+            <th scope="col" class="cds--table-column-checkbox">
+              <ngcc-checkbox
+                [label]="''"
+                [ariaLabel]="'Select all rows'"
+                [checked]="isAllSelected()"
+                [indeterminate]="isIndeterminate()"
+                (checkedChange)="toggleAllRowsSelected()"
+              />
+            </th>
+          }
+          @for (col of getColumns(); track col.key) {
+            <th
+              scope="col"
+              (mouseenter)="hoveredCol = col.key"
+              (mouseleave)="hoveredCol = null"
+              class="thead_action cds--table-header"
+              [class.cds--table-sortable]="col.sortable"
+              (click)="toggleSort(col.key, col.sortable)"
+              [attr.aria-sort]="getSortAria(col.key)"
+              [style.width]="getColumnWidth(col)"
+            >
+              <button
+                type="button"
+                class="cds--table-sort"
+                [class.cds--table-sort--active]="col.sortable && hoveredCol === col.key"
+                (click)="toggleSort(col.key, col.sortable)"
+                [attr.aria-label]="getSortAriaLabel(col.key)"
+                (keydown.enter)="toggleSort(col.key, col.sortable)"
+                aria-live="polite"
+              >
+                <span class="cds--table-sort__flex">
+                  <span class="cds--table-header-label" [attr.title]="stringify(col.header)">
+                    {{ col.header }}
+                  </span>
+
+                  @if (col.sortable) {
+                    <!-- <span class="cds--table-sort__icon"> -->
+                    <ngcc-icon
+                      name="sort_icon"
+                      svgClass="cds--table-sort__icon-unsorted"
+                      style="opacity: 0"
+                      size="sm"
+                    />
+                    <ngcc-icon
+                      [name]="getSortIcon(col.key)"
+                      svgClass="cds--table-sort__icon"
+                      size="sm"
+                    />
+
+                    <!-- </span> -->
+                  }
+                </span>
+              </button>
+            </th>
+          }
+        </tr>
+      </thead>
+
+      <tbody class="cds--data-table__body" [attr.aria-hidden]="getLoading() ? 'true' : null">
+        @if (getLoading()) {
+          @for (_ of loadingRows; track $index) {
+            <tr class="cds--data-table__row">
+              @for (__ of columnPlaceholders; track $index) {
+                <td>
+                  <ngcc-skeleton />
+                </td>
+              }
+            </tr>
+          }
+        } @else {
+          @for (row of processedRows(); track $index; let i = $index) {
+            <tr
+              class="cds--data-table__row"
+              (click)="toggleRowSelect(i, row)"
+              [class.cds--data-table--selected]="isSelected(i)"
+              [class.cds--data-table__row--zebra]="i % 2 === 0"
+              [attr.aria-selected]="isSelected(i) ? 'true' : 'false'"
+            >
+              @if (allowSelection()) {
+                <td class="cds--table-column-checkbox">
+                  <ngcc-checkbox
+                    [label]="''"
+                    [ariaLabel]="'Select row ' + (i + 1)"
+                    [checked]="isSelected(i)"
+                    (checkedChange)="toggleRowSelect(i, row)"
+                  />
+                </td>
+              }
+              @for (col of getColumns(); track col.key) {
+                <td
+                  class="cds--data-table__cell"
+                  [attr.title]="stringify($any(row)[col.key])"
+                  [style.width]="getColumnWidth(col)"
+                >
+                  {{ $any(row)[col.key] }}
+                </td>
+              }
+            </tr>
+          } @empty {
+            <tr>
+              <td class="ngcc--no-data" [attr.colspan]="getColumns().length + 1">
+                <div>No data available</div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+    <ngcc-pagination
+      [page]="currentPage() + 1"
+      [totalItems]="getRows().length"
+      [pageSize]="getConfig().pageSize || 10"
+      (pageChange)="goToPage($event - 1)"
+    />
+  </div>
+</div>

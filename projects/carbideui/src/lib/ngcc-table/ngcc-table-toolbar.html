@@ -1,0 +1,37 @@
+<div class="cds--toolbar-content">
+  @if (getSearchMode()) {
+    <div
+      class="cds--search cds--search--lg cds--toolbar-search-container-expandable"
+      [class.cds--toolbar-search-container-active]="isExpanded()"
+    >
+      <ngcc-button
+        variant="ghost"
+        iconName="search"
+        size="lg"
+        svgClass="cds--search-magnifier-icon"
+        [iconOnly]="true"
+        aria-label="Expand search input"
+        (click)="toggleSearch()"
+      />
+
+      @if (isExpanded()) {
+        <ngcc-input
+          [attr.placeholder]="getPlaceholder()"
+          class=""
+          size="lg"
+          aria-label="Search this table"
+          [value]="query()"
+          (input)="handleInput($any($event.target).value)"
+        />
+
+        @if (showClearButton()) {
+          <ngcc-icon name="close" class="cds--search-close" (click)="clearSearch()" />
+        }
+      }
+    </div>
+  }
+  <!-- Row count & custom actions -->
+  @if (getShowActions()) {
+    <ng-content select="[ngcc-toolbar-actions]" />
+  }
+</div>
