@@ -1,0 +1,58 @@
+<div class="cds--pagination__left">
+  <!-- Page size selector -->
+  <label for="page-size" class="cds--pagination__text"> Items per page: </label>
+  <div class="cds--select cds--select--inline">
+    <select
+      id="page-size"
+      class="cds--select-input"
+      [value]="pageSize"
+      (change)="handlePageSizeChange($event)"
+      aria-label="Items per page"
+    >
+      @for (size of pageSizes; track size) {
+        <option [value]="size">{{ size }}</option>
+      }
+    </select>
+    <div class="cds--select__arrow">
+      <svg cds-icon name="chevron_down" width="16" height="16"></svg>
+    </div>
+  </div>
+
+  <!-- Item count -->
+  <span class="cds--pagination__text cds--pagination__text--items">
+    {{ startItem() }}–{{ endItem() }} of {{ totalItems }}
+  </span>
+</div>
+
+<!-- Navigation -->
+<div
+  class="cds--pagination__right"
+  tabindex="0"
+  (keydown)="onKeydown($event)"
+  role="group"
+  aria-label="Pagination controls"
+>
+  <button
+    type="button"
+    class="cds--pagination__button cds--pagination__button--backward"
+    [disabled]="disablePrev()"
+    (click)="goToPage(page - 1)"
+    aria-label="Previous page"
+  >
+    <ngcc-icon name="chevron_left" size="sm" />
+  </button>
+
+  <span class="cds--pagination__text cds--pagination__page-info" aria-current="page">
+    Page {{ page }} of {{ totalPages() }}
+  </span>
+
+  <button
+    type="button"
+    class="cds--pagination__button cds--pagination__button--forward"
+    [disabled]="disableNext()"
+    (click)="goToPage(page + 1)"
+    aria-label="Next page"
+  >
+    <ngcc-icon name="chevron_right" size="sm" />
+  </button>
+</div>
