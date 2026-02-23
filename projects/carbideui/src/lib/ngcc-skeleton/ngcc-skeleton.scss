@@ -1,0 +1,16 @@
+/* When rounded = true (circle mode) */
+.ngcc--skeleton--rounded,
+.ngcc--skeleton--rounded::before {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ngcc--skeleton__visual {
+  --ngcc-radius: 0px;
+  overflow: hidden;
+  border-radius: var(--ngcc-radius);
+
+  &::before {
+    border-radius: var(--ngcc-radius);
+  }
+}
